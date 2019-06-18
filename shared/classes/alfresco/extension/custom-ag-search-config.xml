@@ -1,0 +1,392 @@
+<alfresco-config>
+
+    <!-- 
+        Infomega Search config
+     -->
+    <config evaluator="string-compare" condition="BINOVO_SEARCH" replace="true">
+    
+        <profiles>
+        
+            <profile id="infomega.search.profile.general" groups="EVERYONE" display-order="100"  content-type="cm:content"
+                display-label-id="infomega.search.profile.general.label" 
+                display-description-id="infomega.search.profile.general.description" >
+                
+                <property id="TEXT" display-label-id="lblText" type="content"/>
+                <property id="cm:name" display-label-id="lblNameFile" type="text"/>
+                <property id="cm:title" display-label-id="lblTitle" type="text"/>
+                <property id="cm:description" display-label-id="lblDescription" type="text"/>
+                <property id="cm:creator" display-label-id="lblCreator" type="text"/>
+                <property id="cm:created" display-label-id="lblCreated" type="date"/>
+                <property id="cm:modified" display-label-id="lblModified" type="date"/>
+                <property id="cm:categories" display-label-id="lblCategories" type="category"/>
+                <property id="cm:content.size" display-label-id="lblContentSize" type="int"/>
+                <property id="cm:content.mimetype" display-label-id="lblMimetype" type="mimetype"/>
+                
+            </profile>
+            
+            <profile id="infomega.search.profile.radicado.entrada" groups="EVERYONE" display-order="110"  content-type="infoRad:radicadoEntrada"
+                display-label-id="infomega.search.profile.radicado.entrada.label" 
+                display-description-id="infomega.search.profile.radicado.entrada.description" >
+                
+                <property id="infoRad:area" display-label-id="lblRadicadoAreaRadica" type="list" component="ag-search-list-datasource">
+                    <control-param name="componentName">ctrl_area</control-param>
+                    <control-param name="objectFields">label,value</control-param>
+                    <control-param name="valuePropertyName">label</control-param>
+                    <control-param name="dataSourceId">infomega_ds_areas</control-param>
+                    <control-param name="typeList">100</control-param>
+                </property>
+                <property id="cm:created" display-label-id="lblRadicadoDateRadica" type="date"/>
+                <property id="infoRad:numero" display-label-id="lblRadicadoNumero" type="text"/>
+                <property id="infoRad:creator" display-label-id="lblRadicadoCreator" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">user,fullName</control-param>
+                    <control-param name="valuePropertyName">user</control-param>
+                    <control-param name="labelPropertyName">fullName</control-param>
+                    <control-param name="dataSourceId">infomega_ds_repository_user</control-param>
+                    <control-param name="filterQueryTemplate">filter={x_userInput}</control-param>
+                    <control-param name="singleQueryTemplate">filter={x_value}</control-param>
+                    <control-param name="minQueryLength">1</control-param>
+                    <control-param name="typeList">300</control-param>
+                </property>
+                <property id="infoRad:responsible" display-label-id="lblRadicadoAsigned" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">user,fullName</control-param>
+                    <control-param name="valuePropertyName">user</control-param>
+                    <control-param name="labelPropertyName">fullName</control-param>
+                    <control-param name="dataSourceId">infomega_ds_repository_user</control-param>
+                    <control-param name="filterQueryTemplate">filter={x_userInput}</control-param>
+                    <control-param name="singleQueryTemplate">filter={x_value}</control-param>
+                    <control-param name="minQueryLength">1</control-param>
+                    <control-param name="maxlength">40</control-param>
+                    <control-param name="typeList">300</control-param>
+                </property>
+                <property id="infoRad:status" display-label-id="lblRadicadoStatus" type="list" component="ag-search-selectone">
+                    <control-param name="labels">Vacío|Pendiente distribuir|En trámite|Pendiente respuesta|Pendiente Radicado respuesta|Trámite|Revisada y verificada|Pendiente aprobar por gerencia|Aprobada por gerencia|Aceptada|Pendiente aprobación dirección|Aprobada dirección|Pendiente de pago|Pagada|Rechazada|Cerrado</control-param>
+                    <control-param name="values">Vacío|Pendiente distribuir|En trámite|Pendiente respuesta|Pendiente Radicado respuesta|Trámite|Revisada y verificada|Pendiente aprobar por gerencia|Aprobada por gerencia|Aceptada|Pendiente aprobación dirección|Aprobada dirección|Pendiente de pago|Pagada|Rechazada|Cerrado</control-param>
+                </property>
+                <property id="infoRad:canal" display-label-id="lblRadicadoCanal" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">label,value</control-param>
+                    <control-param name="valuePropertyName">value</control-param>
+                    <control-param name="dataSourceId">infomega_ds_reception_channel</control-param>
+                    <control-param name="typeList">100</control-param>
+                </property>
+                <property id="infoRad:canalDetalle" display-label-id="lblRadicadoCanalDetalle" type="text"/>
+                <property id="infoRad:asunto" display-label-id="lblRadicadoAsunto" type="text"/>
+                <property id="infoRad:comentarios" display-label-id="lblRadicadoComentarios" type="text"/>
+                <property id="infoRad:tipoDocumental" display-label-id="lblRadicadoTipoDocumental" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">id,subserie,label</control-param>
+                    <control-param name="valuePropertyName">label</control-param>
+                    <control-param name="dataSourceId">infomega_ds_documentary_type</control-param>
+                    <control-param name="typeList">100</control-param>
+                </property>
+                <property id="infoRad:serie" display-label-id="lblRadicadoSerie" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">id,label</control-param>
+                    <control-param name="valuePropertyName">label</control-param>
+                    <control-param name="dataSourceId">infomega_ds_serie</control-param>
+                    <control-param name="typeList">100</control-param>
+                </property>
+                <property id="infoRad:subserie" display-label-id="lblRadicadoSubSerie" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">id,serie,label</control-param>
+                    <control-param name="valuePropertyName">label</control-param>
+                    <control-param name="dataSourceId">infomega_ds_subserie</control-param>
+                    <control-param name="typeList">100</control-param>
+                </property>
+                <property id="infoRad:numFolios" display-label-id="lblRadicadoNumFolios" type="int"/>
+                <property id="infoRad:cc" display-label-id="lblRadicadoCc" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">user,fullName</control-param>
+                    <control-param name="valuePropertyName">user</control-param>
+                    <control-param name="labelPropertyName">fullName</control-param>
+                    <control-param name="dataSourceId">infomega_ds_repository_user</control-param>
+                    <control-param name="filterQueryTemplate">filter={x_userInput}</control-param>
+                    <control-param name="singleQueryTemplate">filter={x_value}</control-param>
+                    <control-param name="minQueryLength">1</control-param>
+                    <control-param name="typeList">300</control-param>
+                </property>
+                <property id="infoRad:initiatedDistribution" display-label-id="lblRadicadoInitiatedDistribution" type="boolean"/>
+                <property id="infoRad:physicalDelivery" display-label-id="lblRadicadoPhysicalDelivery" type="boolean"/>
+                <property id="infoRad:isPrinted" display-label-id="lblRadicadoIsPrinted" type="boolean"/>
+                <property id="infoEnteEx:nombre" display-label-id="lblRadicadoEnteExNombre" type="text"/>
+                <property id="infoEnteEx:empresa" display-label-id="lblRadicadoEnteExEmpresa" type="text"/>
+                <property id="infoEnteEx:nit" display-label-id="lblRadicadoEnteExNit" type="text"/>
+                <property id="infoEnteEx:area" display-label-id="lblRadicadoEnteExArea" type="text"/>
+                <property id="infoEnteEx:cargo" display-label-id="lblRadicadoEnteExCargo" type="text"/>
+                <property id="infoEnteEx:ciudad" display-label-id="lblRadicadoEnteExCiudad" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">label,value</control-param>
+                    <control-param name="valuePropertyName">value</control-param>
+                    <control-param name="dataSourceId">infomega_ds_city</control-param>
+                    <control-param name="typeList">100</control-param>
+                </property>
+                <property id="infoEnteEx:direccion" display-label-id="lblRadicadoEnteExDireccion" type="text"/>
+                <property id="infoEnteEx:electronicAddr" display-label-id="lblRadicadoEnteExElectronicAddr" type="text"/>
+                <property id="infoEnteIn:area" display-label-id="lblRadicadoEnteInArea" type="text" />
+                <property id="infoEnteIn:nombre" display-label-id="lblRadicadoEnteInNombre" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">user,fullName</control-param>
+                    <control-param name="valuePropertyName">user</control-param>
+                    <control-param name="labelPropertyName">fullName</control-param>
+                    <control-param name="dataSourceId">infomega_ds_repository_user</control-param>
+                    <control-param name="filterQueryTemplate">filter={x_userInput}</control-param>
+                    <control-param name="singleQueryTemplate">filter={x_value}</control-param>
+                    <control-param name="minQueryLength">1</control-param>
+                    <control-param name="typeList">300</control-param>
+                </property>
+                <property id="infoRad:numRadicadoExt" display-label-id="lblRadicadoNumRadicadoExt" type="text"/>
+                <property id="infoInvo:invoiceNumber" display-label-id="lblRadicadoinvoiceNumber" type="text"/>
+                <property id="infoAdvanc:invoiceNumber" display-label-id="lblRadicadoinvoiceNumber" type="text"/>
+                <property id="infoInvo:egressVoucher" display-label-id="lblRadicadoEgressVoucher" type="text"/>
+                <property id="infoAdvanc:egressVoucher" display-label-id="lblRadicadoEgressVoucher" type="text"/>
+                <property id="infoInvo:contractNumber" display-label-id="lblRadicadoContractNumber" type="text"/>
+                <property id="infoAdvanc:contractNumber" display-label-id="lblRadicadoContractNumber" type="text"/>
+                <property id="infoInvo:invoiceConcept" display-label-id="lblRadicadoInvoiceConcept" type="text"/>
+                <property id="infoAdvanc:invoiceConcept" display-label-id="lblRadicadoInvoiceConcept" type="text"/>
+                <property id="infoInvo:total" display-label-id="lblRadicadoinvoiceTotal" type="double"/>
+                <property id="infoAdvanc:total" display-label-id="lblRadicadoinvoiceTotal" type="double"/>
+                <property id="infoInvo:date" display-label-id="lblRadicadoinvoiceDate" type="date"/>
+                <property id="infoAdvanc:date" display-label-id="lblRadicadoinvoiceDate" type="date"/>
+                <property id="infoInvo:paymentTerms" display-label-id="lblRadicadoPaymentTerms" type="int"/>
+                <property id="infoAdvanc:paymentTerms" display-label-id="lblRadicadoPaymentTerms" type="int"/>
+                <property id="infoInvo:contractType" display-label-id="lblRadicadoContractType" type="text"/>
+                <property id="infoAdvanc:contractType" display-label-id="lblRadicadoContractType" type="text"/>
+                
+            </profile>
+            
+            <profile id="infomega.search.profile.radicado.salida" groups="EVERYONE" display-order="120"  content-type="infoRad:radicadoSalida"
+                display-label-id="infomega.search.profile.radicado.salida.label" 
+                display-description-id="infomega.search.profile.radicado.salida.description" >
+                
+                <property id="infoRad:area" display-label-id="lblRadicadoAreaRadica" type="list" component="ag-search-list-datasource">
+                    <control-param name="componentName">ctrl_area</control-param>
+                    <control-param name="objectFields">label,value</control-param>
+                    <control-param name="valuePropertyName">label</control-param>
+                    <control-param name="dataSourceId">infomega_ds_areas</control-param>
+                    <control-param name="typeList">100</control-param>
+                </property>
+                <property id="infoRad:numAnexos" display-label-id="lblRadicadoNumAnexos" type="text"/>
+                <property id="cm:created" display-label-id="lblRadicadoDateRadica" type="date"/>
+                <property id="infoRad:numero" display-label-id="lblRadicadoNumero" type="text"/>
+                <property id="infoRad:creator" display-label-id="lblRadicadoCreator" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">user,fullName</control-param>
+                    <control-param name="valuePropertyName">user</control-param>
+                    <control-param name="labelPropertyName">fullName</control-param>
+                    <control-param name="dataSourceId">infomega_ds_repository_user</control-param>
+                    <control-param name="filterQueryTemplate">filter={x_userInput}</control-param>
+                    <control-param name="singleQueryTemplate">filter={x_value}</control-param>
+                    <control-param name="minQueryLength">1</control-param>
+                    <control-param name="maxlength">40</control-param>
+                    <control-param name="typeList">300</control-param>
+                </property>
+                <property id="infoRad:canal" display-label-id="lblRadicadoCanalSalida" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">label,value</control-param>
+                    <control-param name="valuePropertyName">value</control-param>
+                    <control-param name="dataSourceId">infomega_ds_reception_channel</control-param>
+                    <control-param name="typeList">100</control-param>
+                </property>
+                <property id="infoRad:canalDetalle" display-label-id="lblRadicadoCanalDetalle" type="text"/>
+                <property id="infoRad:asunto" display-label-id="lblRadicadoAsunto" type="text"/>
+                <property id="infoRad:comentarios" display-label-id="lblRadicadoComentarios" type="text"/>
+                <property id="infoRad:tipoDocumental" display-label-id="lblRadicadoTipoDocumental" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">id,subserie,label</control-param>
+                    <control-param name="valuePropertyName">label</control-param>
+                    <control-param name="dataSourceId">infomega_ds_documentary_type</control-param>
+                    <control-param name="typeList">100</control-param>
+                </property>
+                <property id="infoRad:serie" display-label-id="lblRadicadoSerie" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">id,label</control-param>
+                    <control-param name="valuePropertyName">label</control-param>
+                    <control-param name="dataSourceId">infomega_ds_serie</control-param>
+                    <control-param name="typeList">100</control-param>
+                </property>
+                <property id="infoRad:subserie" display-label-id="lblRadicadoSubSerie" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">id,serie,label</control-param>
+                    <control-param name="valuePropertyName">label</control-param>
+                    <control-param name="dataSourceId">infomega_ds_subserie</control-param>
+                    <control-param name="typeList">100</control-param>
+                </property>
+                <property id="infoRad:numFolios" display-label-id="lblRadicadoNumFolios" type="int"/>
+                <property id="infoEnteIn:nombre" display-label-id="lblRadicadoEnteInNombre" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">user,fullName</control-param>
+                    <control-param name="valuePropertyName">user</control-param>
+                    <control-param name="labelPropertyName">fullName</control-param>
+                    <control-param name="dataSourceId">infomega_ds_repository_user</control-param>
+                    <control-param name="filterQueryTemplate">filter={x_userInput}</control-param>
+                    <control-param name="singleQueryTemplate">filter={x_value}</control-param>
+                    <control-param name="minQueryLength">1</control-param>
+                    <control-param name="typeList">300</control-param>
+                </property>
+                <property id="infoEnteIn:area" display-label-id="lblRadicadoEnteInArea" type="text"/>
+                <property id="infoEnteIn:ciudad" display-label-id="lblRadicadoEnteInCiudad" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">label,value</control-param>
+                    <control-param name="valuePropertyName">value</control-param>
+                    <control-param name="dataSourceId">infomega_ds_city</control-param>
+                    <control-param name="typeList">100</control-param>
+                </property>
+                <property id="infoEnteEx:nombre" display-label-id="lblRadicadoSalEnteExNombre" type="text"/>
+                <property id="infoEnteEx:nit" display-label-id="lblRadicadoSalEnteExNit" type="text"/>
+                <property id="infoEnteEx:empresa" display-label-id="lblRadicadoSalEnteExEmpresa" type="text"/>
+                <property id="infoEnteEx:area" display-label-id="lblRadicadoSalEnteExArea" type="text"/>
+                <property id="infoEnteEx:cargo" display-label-id="lblRadicadoSalEnteExCargo" type="text"/>
+                <property id="infoEnteEx:ciudad" display-label-id="lblRadicadoSalEnteExCiudad" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">label,value</control-param>
+                    <control-param name="valuePropertyName">value</control-param>
+                    <control-param name="dataSourceId">infomega_ds_city</control-param>
+                    <control-param name="typeList">100</control-param>
+                </property>
+                <property id="infoEnteEx:direccion" display-label-id="lblRadicadoSalEnteExDireccion" type="text"/>
+                <property id="infoEnteEx:electronicAddr" display-label-id="lblRadicadoSalEnteElectronicAddr" type="text"/>
+                <property id="infoRad:numRadicadoExt" display-label-id="lblRadicadoNumRadicadoExt" type="text"/>
+                <property id="infoRad:numRadicadoInt" display-label-id="lblRadicadoNumRadicadoInt" type="text"/>
+                
+            </profile>
+            
+            <profile id="infomega.search.profile.radicado.interno" groups="EVERYONE" display-order="130"  content-type="infoRad:radicadoInterno"
+                display-label-id="infomega.search.profile.radicado.interno.label" 
+                display-description-id="infomega.search.profile.radicado.interno.description" >
+                
+                <property id="infoRad:area" display-label-id="lblRadicadoAreaRadica" type="list" component="ag-search-list-datasource">
+                    <control-param name="componentName">ctrl_area</control-param>
+                    <control-param name="objectFields">label,value</control-param>
+                    <control-param name="valuePropertyName">label</control-param>
+                    <control-param name="dataSourceId">infomega_ds_areas</control-param>
+                    <control-param name="typeList">100</control-param>
+                </property>
+                <property id="cm:created" display-label-id="lblRadicadoDateRadica" type="date"/>
+                <property id="infoEnteIn:ciudad" display-label-id="lblRadicadoEnteInCiudad" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">label,value</control-param>
+                    <control-param name="valuePropertyName">value</control-param>
+                    <control-param name="dataSourceId">infomega_ds_city</control-param>
+                    <control-param name="typeList">100</control-param>
+                </property>
+                <property id="infoRad:numAnexos" display-label-id="lblRadicadoNumAnexos" type="text"/>
+                
+                <property id="infoRad:numero" display-label-id="lblRadicadoNumero" type="text"/>
+                <property id="infoRad:creator" display-label-id="lblRadicadoCreator" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">user,fullName</control-param>
+                    <control-param name="valuePropertyName">user</control-param>
+                    <control-param name="labelPropertyName">fullName</control-param>
+                    <control-param name="dataSourceId">infomega_ds_repository_user</control-param>
+                    <control-param name="filterQueryTemplate">filter={x_userInput}</control-param>
+                    <control-param name="singleQueryTemplate">filter={x_value}</control-param>
+                    <control-param name="minQueryLength">1</control-param>
+                    <control-param name="maxlength">40</control-param>
+                    <control-param name="typeList">300</control-param>
+                </property>
+                <property id="infoRad:responsible" display-label-id="lblRadicadoAsigned" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">user,fullName</control-param>
+                    <control-param name="valuePropertyName">user</control-param>
+                    <control-param name="labelPropertyName">fullName</control-param>
+                    <control-param name="dataSourceId">infomega_ds_repository_user</control-param>
+                    <control-param name="filterQueryTemplate">filter={x_userInput}</control-param>
+                    <control-param name="singleQueryTemplate">filter={x_value}</control-param>
+                    <control-param name="minQueryLength">1</control-param>
+                    <control-param name="maxlength">40</control-param>
+                    <control-param name="typeList">300</control-param>
+                </property>
+                <property id="infoRad:status" display-label-id="lblRadicadoStatus" type="list" component="ag-search-selectone">
+                    <control-param name="labels">Vacío|Pendiente distribuir|En trámite|Pendiente respuesta|Pendiente Radicado respuesta|Trámite|Cerrado</control-param>
+                    <control-param name="values">Vacío|Pendiente distribuir|En trámite|Pendiente respuesta|Pendiente Radicado respuesta|Trámite|Cerrado</control-param>
+                </property>
+                <property id="infoRad:canal" display-label-id="lblRadicadoIntCanal" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">label,value</control-param>
+                    <control-param name="valuePropertyName">value</control-param>
+                    <control-param name="dataSourceId">infomega_ds_reception_channel</control-param>
+                    <control-param name="typeList">100</control-param>
+                </property>
+                <property id="infoRad:canalDetalle" display-label-id="lblRadicadoCanalDetalle" type="text"/>
+                <property id="infoRad:asunto" display-label-id="lblRadicadoAsunto" type="text"/>
+                <property id="infoRad:comentarios" display-label-id="lblRadicadoComentarios" type="text"/>
+                <property id="infoRad:tipoDocumental" display-label-id="lblRadicadoTipoDocumental" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">id,subserie,label</control-param>
+                    <control-param name="valuePropertyName">label</control-param>
+                    <control-param name="dataSourceId">infomega_ds_documentary_type_without_factura</control-param>
+                    <control-param name="typeList">100</control-param>
+                </property>
+                <property id="infoRad:serie" display-label-id="lblRadicadoSerie" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">id,label</control-param>
+                    <control-param name="valuePropertyName">label</control-param>
+                    <control-param name="dataSourceId">infomega_ds_serie</control-param>
+                    <control-param name="typeList">100</control-param>
+                </property>
+                <property id="infoRad:subserie" display-label-id="lblRadicadoSubSerie" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">id,serie,label</control-param>
+                    <control-param name="valuePropertyName">label</control-param>
+                    <control-param name="dataSourceId">infomega_ds_subserie</control-param>
+                    <control-param name="typeList">100</control-param>
+                </property>
+                <property id="infoRad:numFolios" display-label-id="lblRadicadoNumFolios" type="int"/>
+                <property id="infoEnteIn:nombre" display-label-id="lblRadicadoInEnteInNombre" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">user,fullName</control-param>
+                    <control-param name="valuePropertyName">user</control-param>
+                    <control-param name="labelPropertyName">fullName</control-param>
+                    <control-param name="dataSourceId">infomega_ds_repository_user</control-param>
+                    <control-param name="filterQueryTemplate">filter={x_userInput}</control-param>
+                    <control-param name="singleQueryTemplate">filter={x_value}</control-param>
+                    <control-param name="minQueryLength">1</control-param>
+                    <control-param name="typeList">300</control-param>
+                </property>
+                <property id="infoEnteIn:area" display-label-id="lblRadicadoInEnteInArea" type="text"/>
+                <property id="infoEnteIn:ciudad" display-label-id="lblRadicadoInEnteInCiudad" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">label,value</control-param>
+                    <control-param name="valuePropertyName">value</control-param>
+                    <control-param name="dataSourceId">infomega_ds_city</control-param>
+                    <control-param name="typeList">100</control-param>
+                </property>
+                <property id="infoRad:nombreDestinatario" display-label-id="lblRadicadoInNombreDestinatario" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">user,fullName</control-param>
+                    <control-param name="valuePropertyName">user</control-param>
+                    <control-param name="labelPropertyName">fullName</control-param>
+                    <control-param name="dataSourceId">infomega_ds_repository_user</control-param>
+                    <control-param name="filterQueryTemplate">filter={x_userInput}</control-param>
+                    <control-param name="singleQueryTemplate">filter={x_value}</control-param>
+                    <control-param name="minQueryLength">1</control-param>
+                    <control-param name="typeList">300</control-param>
+                </property>
+                <property id="infoRad:areaDestinatario" display-label-id="lblRadicadoInAreaDestinatario" type="text"/>
+                <property id="infoRad:ciudadDestinatario" display-label-id="lblRadicadoInCiudadDestinatario" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">label,value</control-param>
+                    <control-param name="valuePropertyName">value</control-param>
+                    <control-param name="dataSourceId">infomega_ds_city</control-param>
+                    <control-param name="typeList">100</control-param>
+                </property>
+                <property id="infoRad:cc" display-label-id="lblRadicadoInCcDestinatarios" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">user,fullName</control-param>
+                    <control-param name="valuePropertyName">user</control-param>
+                    <control-param name="labelPropertyName">fullName</control-param>
+                    <control-param name="dataSourceId">infomega_ds_repository_user</control-param>
+                    <control-param name="filterQueryTemplate">filter={x_userInput}</control-param>
+                    <control-param name="singleQueryTemplate">filter={x_value}</control-param>
+                    <control-param name="minQueryLength">1</control-param>
+                    <control-param name="typeList">300</control-param>
+                </property>
+                <property id="infoRad:numRadicadoInt" display-label-id="lblRadicadoNumRadicadoInt" type="text"/>
+
+            </profile>
+            
+            <profile id="infomega.search.profile.loan" groups="EVERYONE" display-order="140"  content-type="infoLoan:loanBase"
+                display-label-id="infomega.search.profile.loan.label" 
+                display-description-id="infomega.search.profile.loan.description" >
+                
+                <property id="infoLoan:loanId" display-label-id="lblLoanId" type="text"/>
+                <property id="infoLoan:applicationDate" display-label-id="lblLoanApplicationDate" type="date"/>
+                <property id="infoLoan:applicantArea" display-label-id="lblLoanApplicantArea" type="text"/>
+                <property id="infoLoan:applicantUser" display-label-id="lblLoanApplicantUser" type="list" component="ag-search-list-datasource">
+                    <control-param name="objectFields">user,fullName</control-param>
+                    <control-param name="valuePropertyName">user</control-param>
+                    <control-param name="labelPropertyName">fullName</control-param>
+                    <control-param name="dataSourceId">infomega_ds_repository_user</control-param>
+                    <control-param name="filterQueryTemplate">filter={x_userInput}</control-param>
+                    <control-param name="singleQueryTemplate">filter={x_value}</control-param>
+                    <control-param name="minQueryLength">1</control-param>
+                    <control-param name="typeList">300</control-param>
+                </property>
+                <property id="infoLoan:applicationMessage" display-label-id="lblLoanApplicationMessage" type="text"/>
+                <property id="infoLoan:attentionDate" display-label-id="lblLoanAttentionDate" type="date"/>
+                <property id="infoLoan:state" display-label-id="lblLoanState" type="list" component="ag-search-selectone">
+                    <control-param name="labels">Vacío|Pendiente atender|Solicitud atendida|Pendiente devolución|Devuelto</control-param>
+                    <control-param name="values">Vacío|Pendiente atender|Solicitud atendida|Pendiente devolución|Devuelto</control-param>
+                </property>
+                <property id="infoLoan:attentionMeans" display-label-id="lblLoanAttentionMeans" type="text"/>
+                
+            </profile>           
+        </profiles>
+        
+    </config>
+    
+</alfresco-config>
+
